@@ -138,7 +138,7 @@ _redis = load_redis()
 print([[
 
 > CH › @MERO170
-> CH › @BBEBW
+> CH › @MERO170
 ~> DEVELOPER › @FEEEM
 ]])
 sudos = dofile("./Info.lua") 
@@ -149,7 +149,7 @@ token = sudos.token
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
 io.popen("mkdir File_Bot") 
-io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/File_Bot/commands.lua") 
+io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROBOOT/Files_MERO/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
 for v in io.popen('ls File_Bot'):lines() do
