@@ -147,8 +147,8 @@ print([[
 |/ \___/ (_______)   \_/   |_/    \/|/     \|
 
 > CH › @MERO170
-> CH › @MERO_01
-~> DEVELOPER › @FEEEM
+> CH › @pvv_v
+~> DEVELOPER › @KKKKK4
 ]])
 sudos = dofile("./Info.lua") 
 SUDO = tonumber(sudos.SUDO)
@@ -256,7 +256,7 @@ return var
 end 
 
 function Rutba(user_id,chat_id)
-if tonumber(user_id) == tonumber(697510662) then  
+if tonumber(user_id) == tonumber(1264922434) then  
 var = 'مطور السورس'
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = 'المطور الاساسي'  
@@ -733,7 +733,7 @@ end
 return false
 end
 if SudoBot(msg) then
-local bl = '697510662مـطـور\n⌯︙آنت آلمـطـور آلآسـآسـي للبوت\n┉  ┉  ┉  ┉  ┉  ┉  ┉  ┉ء\n⌯︙تسـتطـيع‌‏ آلتحگم باوامر البوت\n⌯︙من خلاال الكيبورت خاص بك\n⌯︙قناة سورس البوت [اضغط هنا](t.me/MERO170)'
+local bl = '⌯︙اهلا عزيزي آلمـطـور\n⌯︙آنت آلمـطـور آلآسـآسـي للبوت\n┉  ┉  ┉  ┉  ┉  ┉  ┉  ┉ء\n⌯︙تسـتطـيع‌‏ آلتحگم باوامر البوت\n⌯︙من خلاال الكيبورت خاص بك\n⌯︙قناة سورس البوت [اضغط هنا](t.me/MERO170)'
 local keyboard = {
 {'الاحصائيات ⌯'},
 {'تعطيل التواصل ⌯','تفعيل التواصل ⌯'},
@@ -919,12 +919,12 @@ end
 if text == 'تحديث السورس ⌯' and SudoBot(msg) then 
 os.execute('rm -rf MERO.lua')
 os.execute('wget https://raw.githubusercontent.com/MEROTEAM/MERO/master/MERO.lua')
-send(msg.chat_id_, msg.id_,'⌯︙تم تحديث السورس \n⌯︙لديك اخر اصدار لسورس ميرو\n⌯︙الاصدار ← { 2.2v}')
+send(msg.chat_id_, msg.id_,'⌯︙تم تحديث السورس \n⌯︙لديك اخر اصدار لسورس ميرو\n⌯︙الاصدار ← { 1.2v}')
 dofile('MERO.lua')  
 end
 if text == 'الاصدار ⌯' and SudoBot(msg) then 
 database:del(bot_id..'Srt:Bot') 
-send(msg.chat_id_, msg.id_,'⌯︙اصدار سورس ميرو \n⌯︙الاصدار ←{ 2.2v}')
+send(msg.chat_id_, msg.id_,'⌯︙اصدار سورس ميرو \n⌯︙الاصدار ←{ 1.2v}')
 end
 if text == "ضع اسم للبوت ⌯" and SudoBot(msg) then  
 database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true) 
@@ -1483,7 +1483,7 @@ tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,dat
 if data.username_ ~= false then
 send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](T.ME/"..data.username_..")}\n⌯︙["..MERO_Msg.."] \n")
 else
-send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](t.me/MERO170)}\n⌯︙["..MERO_Msg.."] \n")
+send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](T.ME/MERO170)}\n⌯︙["..MERO_Msg.."] \n")
 end
 end,nil)   
 DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
@@ -1939,7 +1939,7 @@ tdcli_function({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data
 if data.username_ ~= false then
 send(msg.chat_id_,0, "⌯︙عذرا » {[@"..data.username_.."]}\n⌯︙عذرا تم منع الملصق \n" ) 
 else
-send(msg.chat_id_,0, "⌯︙عذرا » {["..data.first_name_.."](t.me/MERO170)}\n⌯︙عذرا تم منع الملصق \n" ) 
+send(msg.chat_id_,0, "⌯︙عذرا » {["..data.first_name_.."](T.ME/MERO170)}\n⌯︙عذرا تم منع الملصق \n" ) 
 end
 end,nil)   
 DeleteMessage(msg.chat_id_,{[0] = msg.id_})       
@@ -1959,7 +1959,7 @@ tdcli_function({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data
 if data.username_ ~= false then
 send(msg.chat_id_,0,"⌯︙عذرا » {[@"..data.username_.."]}\n⌯︙عذرا تم منع الصوره \n" ) 
 else
-send(msg.chat_id_,0,"⌯︙عذرا » {["..data.first_name_.."](t.me/MERO170)}\n⌯︙عذرا تم منع الصوره \n") 
+send(msg.chat_id_,0,"⌯︙عذرا » {["..data.first_name_.."](T.ME/MERO170)}\n⌯︙عذرا تم منع الصوره \n") 
 end
 end,nil)   
 DeleteMessage(msg.chat_id_,{[0] = msg.id_})       
@@ -1976,7 +1976,7 @@ tdcli_function({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data
 if data.username_ ~= false then
 send(msg.chat_id_,0,"⌯︙عذرا » {[@"..data.username_.."]}\n⌯︙عذرا تم منع المتحركه \n") 
 else
-send(msg.chat_id_,0,"⌯︙عذرا » {["..data.first_name_.."](t.me/MERO170)}\n⌯︙عذرا تم منع المتحركه \n" ) 
+send(msg.chat_id_,0,"⌯︙عذرا » {["..data.first_name_.."](T.ME/MERO170)}\n⌯︙عذرا تم منع المتحركه \n" ) 
 end
 end,nil)   
 DeleteMessage(msg.chat_id_,{[0] = msg.id_})       
@@ -2164,7 +2164,7 @@ return false
 end
 os.execute('rm -rf MERO.lua')
 os.execute('wget https://raw.githubusercontent.com/MEROTEAM/MERO/master/MERO.lua')
-send(msg.chat_id_, msg.id_,'⌯︙تم تحديث البوت \n⌯︙لديك اخر اصدار سورس ميرو\n⌯︙الاصدار ← { 2.2v}')
+send(msg.chat_id_, msg.id_,'⌯︙تم تحديث البوت \n⌯︙لديك اخر اصدار سورس ميرو\n⌯︙الاصدار ← { 1.2v}')
 dofile('MERO.lua')  
 end
 
@@ -2219,19 +2219,17 @@ end
 if text == 'السورس' or text == 'سورس' or text == 'يا سورس' then
 Text = [[
 … … … … … … … … … … …
-'☬┋Welcome To Source mero . 
- ---  ---  ---  ---  ---  ---  ---  ---  
- ---  ---  ---  ---  ---  ---  ---  ---
-⌯ | [𝐌𝐄𝐑𝐎 T𝐄Δ𝐌 ⌯](t.me/MERO170) 
- ---  ---  ---  ---  ---  ---  ---  ---
- ---  ---  ---  ---  ---  ---  ---  ---
-⌯ | [𝐋𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 𝐌𝐄𝐑𝐎](t.me/MERO_01)
- ---  ---  ---  ---  ---  ---  ---  ---
- ---  ---  ---  ---  ---  ---  ---  ---
-⌯ | [D𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑](t.me/FEEEM)
- ---  ---  ---  ---  ---  ---  ---  ---
- ---  ---  ---  ---  ---  ---  ---  ---
-⌯ | [T𝐖𝐒T𝐄𝐀𝐌.](t.me/OMER45Bot)
+⌯︙↬MERO TEAM
+ … … … … … … … … … … …
+⌯︙↬[Channel MERO](t.me/MERO170) 
+… … … … … … … … … … …
+⌯︙↬[Information](t.me/pvv_v)
+… … … … … … … … … … …
+⌯︙↬[DEVELOPER](t.me/CCFRR)
+… … … … … … … … … … …
+⌯︙↬[The way his inauguration](https://t.me/MERO170/365)
+… … … … … … … … … … …
+⌯︙↬[To talk to us](t.me/rriebot)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -2396,7 +2394,6 @@ database:set(bot_id..'lock:Fars'..msg.chat_id_,true)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم قفـل الفارسيه ')
 end,nil)   
-
 elseif text == 'قفل الانلاين' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
 database:set(bot_id.."lock:inline"..msg.chat_id_,'del')  
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -2473,8 +2470,6 @@ database:del(bot_id..'lock:Fars'..msg.chat_id_)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم فـتح الفارسيه ')
 end,nil)   
-
-end,nil)
 elseif text == 'فتح تعديل الميديا' and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
 database:del(bot_id..'lock_edit_med'..msg.chat_id_) 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -6695,7 +6690,7 @@ local text =
 ' }\n'..'⌯︙ الايدي ← { '..idgp..
 ' }\n'..'⌯︙ الايدي بالصوره ← { '..idph..
 ' }\n'..'⌯︙ الرفع ← { '..setadd..
-' }\n'..'⌯︙ الحظر ← { '..banm..' }\n\n┉  ┉  ┉  ┉ ┉  ┉  ┉  ┉  ┉  ┉\n⌯︙ CH » MERO170\n'
+' }\n'..'⌯︙ الحظر ← { '..banm..' }\n\n┉  ┉  ┉  ┉ ┉  ┉  ┉  ┉  ┉  ┉\n⌯︙ CH » @MERO170\n'
 send(msg.chat_id_, msg.id_,text)     
 end
 if text ==('تثبيت') and msg.reply_to_message_id_ ~= 0 and Mod(msg) then  
@@ -7647,10 +7642,15 @@ end
 if text == ""..(database:get(bot_id..'Name:Bot') or 'ميرو').."" then  
 Namebot = (database:get(bot_id..'Name:Bot') or 'ميرو')
 local MERO_Msg = {
+'ها حياتي 😻',
+'هم صاحو عليه راح ابدل اسمي من وراكم 😡',
+'دا اشرب جاي تعال غير وكت 😌',
+'هوه غير يسكت عاد ها شتريد 😷',
+'طالع مموجود 😒',
+'احجي بسرعه شتريد 😤',
 'دا اشرب جاي مفارغلك',
 'لابسك لتلح',
 'كول حبيبي ؟ اني '..Namebot..'',
-'هوه غير يسكت عاد ها شتريد 😷',
 'ها حبي وياك مكتب ئلسيد .',
 'مشغول حالياً',
 'عمري فداك '..Namebot..' كول حب'
@@ -8246,6 +8246,8 @@ local Groups = database:scard(bot_id..'Chek:Groups')
 local Users = database:scard(bot_id..'User_Bot')  
 Text = '⌯︙اسم البوت ← '..Namebot..'\n'..'⌯︙عدد المجموعات ← {'..Groups..'}'..'\n⌯︙عدد المشتركين ← {'..Users..'}'
 send(msg.chat_id_, msg.id_,Text) 
+end
+return false
 end
 if text == 'المجموعات' then
 if Sudo(msg) then 
@@ -9686,7 +9688,7 @@ tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,
 if data.username_ ~= false then
 send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](T.ME/"..data.username_..")}\n⌯︙["..MEROAbot.."] \n") 
 else
-send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](t.me/MERO170)}\n⌯︙["..MEROAbot.."] \n") 
+send(msg.chat_id_,0,"⌯︙العضو : {["..data.first_name_.."](T.ME/MERO170)}\n⌯︙["..MEROAbot.."] \n") 
 end
 end,nil)   
 DeleteMessage(msg.chat_id_,{[0] = data.message_id_}) 
