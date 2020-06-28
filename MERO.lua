@@ -2218,18 +2218,19 @@ end
 
 if text == 'السورس' or text == 'سورس' or text == 'يا سورس' then
 Text = [[
-… … … … … … … … … … …
-⌯︙↬MERO TEAM
- … … … … … … … … … … …
-⌯︙↬[Channel MERO](t.me/MERO170) 
-… … … … … … … … … … …
-⌯︙↬[Information](t.me/pvv_v)
-… … … … … … … … … … …
-⌯︙↬[DEVELOPER](t.me/CCFRR)
-… … … … … … … … … … …
-⌯︙↬[The way his inauguration](https://t.me/MERO170/365)
-… … … … … … … … … … …
-⌯︙↬[To talk to us](t.me/rriebot)
+┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ 
+'☬┋Welcome To Source mero . 
+ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
+⌯ | [𝐌𝐄𝐑𝐎 T𝐄Δ𝐌 ⌯](t.me/MERO170) 
+  ---  ---  ---  ---  ---  ---  
+⌯ | [𝐋𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 𝐌𝐄𝐑𝐎](t.me/MERO_01)
+  ---  ---  ---  ---  ---  ---
+⌯ | [D𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑](t.me/FEEEM)
+  ---  ---  ---  ---  ---  ---
+⌯ | [T𝐖𝐒T𝐄𝐀𝐌.](t.me/OMER45Bot)
+ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
+ THE PEST SOURVR ON TELEGRAM
+ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
@@ -2394,6 +2395,11 @@ database:set(bot_id..'lock:Fars'..msg.chat_id_,true)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم قفـل الفارسيه ')
 end,nil)   
+elseif text == 'قفل النكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
+database:set(bot_id..'lock:Engilsh'..msg.chat_id_,true) 
+tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
+send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم قفـل النكليزيه ')
+end,nil)
 elseif text == 'قفل الانلاين' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
 database:set(bot_id.."lock:inline"..msg.chat_id_,'del')  
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -2470,6 +2476,11 @@ database:del(bot_id..'lock:Fars'..msg.chat_id_)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم فـتح الفارسيه ')
 end,nil)   
+elseif text == 'فتح النكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
+database:del(bot_id..'lock:Engilsh'..msg.chat_id_) 
+tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
+send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم فـتح النكليزيه ')
+end,nil)
 elseif text == 'فتح تعديل الميديا' and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
 database:del(bot_id..'lock_edit_med'..msg.chat_id_) 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -7642,11 +7653,12 @@ end
 if text == ""..(database:get(bot_id..'Name:Bot') or 'ميرو').."" then  
 Namebot = (database:get(bot_id..'Name:Bot') or 'ميرو')
 local MERO_Msg = {
-'هوه غير يسكت عاد ها شتريد',
+'اسمي مينو كول',
 'دا اشرب جاي مفارغلك',
 'لابسك لتلح',
 'كول حبيبي ؟ اني '..Namebot..'',
 'ها حبي وياك مكتب ئلسيد .',
+'مشغول حالياً',
 'عمري فداك '..Namebot..' كول حب'
 }
 send(msg.chat_id_, msg.id_,'['..MERO_Msg[math.random(#MERO_Msg)]..']') 
