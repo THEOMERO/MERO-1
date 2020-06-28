@@ -8244,7 +8244,7 @@ if text == 'بوت' then
 Namebot = (database:get(bot_id..'Name:Bot') or 'ميرو')
 send(msg.chat_id_, msg.id_,'اسمي القميل ['..Namebot..'] ') 
 end
-if text == 'الاحصائيات' then
+if text == '⌯ الاحصائيات' then
 if Sudo(msg) then 
 local Groups = database:scard(bot_id..'Chek:Groups')  
 local Users = database:scard(bot_id..'User_Bot')  
