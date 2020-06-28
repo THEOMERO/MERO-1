@@ -7643,13 +7643,10 @@ if text == ""..(database:get(bot_id..'Name:Bot') or 'ميرو').."" then
 Namebot = (database:get(bot_id..'Name:Bot') or 'ميرو')
 local MERO_Msg = {
 'هوه غير يسكت عاد ها شتريد',
-'طالع مموجود',
-'احجي بسرعه شتريد',
 'دا اشرب جاي مفارغلك',
 'لابسك لتلح',
 'كول حبيبي ؟ اني '..Namebot..'',
 'ها حبي وياك مكتب ئلسيد .',
-'مشغول حالياً',
 'عمري فداك '..Namebot..' كول حب'
 }
 send(msg.chat_id_, msg.id_,'['..MERO_Msg[math.random(#MERO_Msg)]..']') 
