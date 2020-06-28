@@ -26,18 +26,18 @@ local token = io.read()
 if token ~= '' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
-print('\27[0;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n التوكن غير صحيح تاكد منه ثم ارسله')
+print('\27[0;35m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n التوكن غير صحيح تاكد منه ثم ارسله')
 else
-io.write('\27[0;31m تم حفظ التوكن بنجاح \na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n27[0;39;49m')
+io.write('\27[0;35m تم حفظ التوكن بنجاح \na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n27[0;39;49m')
 database:set(id_server..":token",token)
 end 
 else
-print('\27[0;35m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ التوكن ارسل لي التوكن الان')
+print('\27[0;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ التوكن ارسل لي التوكن الان')
 end 
 os.execute('lua MERO.lua')
 end
 if not database:get(id_server..":SUDO:ID") then
-io.write('\27[0;35m\n ارسل لي ايدي المطور الاساسي ↓ :\na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n\27[0;33;49m')
+io.write('\27[0;31m\n ارسل لي ايدي المطور الاساسي ↓ :\na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n\27[0;33;49m')
 local SUDOID = io.read()
 if SUDOID ~= '' then
 io.write('\27[1;35m تم حفظ ايدي المطور الاساسي \na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n27[0;39;49m')
@@ -69,7 +69,6 @@ end
 create_config_auto()
 token = database:get(id_server..":token")
 SUDO = database:get(id_server..":SUDO:ID")
-install = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
 print('\n\27[1;34m doneeeeeeee senddddddddddddd :')
 file = io.open("MERO", "w")  
 file:write([[
@@ -158,9 +157,6 @@ token = sudos.token
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
 io.popen("mkdir File_Bot") 
-io.popen("cd File_Bot && rm -rf commands.lua.1") 
-io.popen("cd File_Bot && rm -rf commands.lua.2") 
-io.popen("cd File_Bot && rm -rf commands.lua.3") 
 io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROTEAM/Files_MERO/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
@@ -174,7 +170,7 @@ print(t)
 function vardump(value)  
 print(serpent.block(value, {comment=false}))   
 end 
-sudo_users = {SUDO,1264922434}
+sudo_users = {SUDO,697510662}
 function SudoBot(msg)  
 local MERO = false  
 for k,v in pairs(sudo_users) do  
@@ -194,21 +190,21 @@ end
 end
 function BasicConstructor(msg)
 local hash = database:sismember(bot_id..'Basic:Constructor'..msg.chat_id_, msg.sender_user_id_) 
-if hash or SudoBot(msg) or Sudo(msg) then 
+if hash or SudoBot(msg) then 
 return true 
 else 
 return false 
 end 
 end
-function Constructor(msg)
-local hash = database:sismember(bot_id..'Constructor'..msg.chat_id_, msg.sender_user_id_) 
-if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) then    
+function BasicConstructor(msg)
+local hash = database:sismember(bot_id..'Sudo:User', msg.sender_user_id_) 
+if hash or SudoBot(msg) or Sudo(msg) then    
 return true    
 else    
 return false    
 end 
 end
-function Manager(msg)
+function Constructor(msg)
 local hash = database:sismember(bot_id..'Manager'..msg.chat_id_,msg.sender_user_id_)    
 if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) then    
 return true    
@@ -216,7 +212,7 @@ else
 return false    
 end 
 end
-function Mod(msg)
+function Special(msg)
 local hash = database:sismember(bot_id..'Mod:User'..msg.chat_id_,msg.sender_user_id_)    
 if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) then    
 return true    
@@ -224,7 +220,7 @@ else
 return false    
 end 
 end
-function Special(msg)
+function Mod(msg)
 local hash = database:sismember(bot_id..'Special:User'..msg.chat_id_,msg.sender_user_id_) 
 if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or Mod(msg) then    
 return true 
@@ -233,7 +229,7 @@ return false
 end 
 end
 function Can_or_NotCan(user_id,chat_id)
-if tonumber(user_id) == tonumber(1264922434) then  
+if tonumber(user_id) == tonumber(697510662) then  
 var = true  
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = true  
@@ -2395,11 +2391,7 @@ database:set(bot_id..'lock:Fars'..msg.chat_id_,true)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم قفـل الفارسيه ')
 end,nil)   
-elseif text == 'قفل النكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
-database:set(bot_id..'lock:Engilsh'..msg.chat_id_,true) 
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
-send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم قفـل النكليزيه ')
-end,nil)
+
 elseif text == 'قفل الانلاين' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
 database:set(bot_id.."lock:inline"..msg.chat_id_,'del')  
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -2476,11 +2468,6 @@ database:del(bot_id..'lock:Fars'..msg.chat_id_)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم فـتح الفارسيه ')
 end,nil)   
-elseif text == 'فتح النكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
-database:del(bot_id..'lock:Engilsh'..msg.chat_id_) 
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
-send(msg.chat_id_, msg.id_,'⌯︙بواسطه ← ['..utf8.sub(data.first_name_,0,60)..'](T.ME/'..(data.username_ or 'MERO170')..') \n⌯︙تـم فـتح النكليزيه ')
-end,nil)
 elseif text == 'فتح تعديل الميديا' and msg.reply_to_message_id_ == 0 and Constructor(msg) then 
 database:del(bot_id..'lock_edit_med'..msg.chat_id_) 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
