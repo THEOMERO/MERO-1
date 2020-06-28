@@ -931,7 +931,7 @@ database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true)
 send(msg.chat_id_, msg.id_,"⌯︙ارسل اليه الاسم الان ")
 return false
 end
-if text == 'الاحصائيات 🔍' and SudoBot(msg) then 
+if text == 'الاحصائيات ⌯' and SudoBot(msg) then 
 local Groups = database:scard(bot_id..'Chek:Groups')  
 local Users = database:scard(bot_id..'User_Bot')  
 Text = '🎗️| اسم البوت ← '..Namebot..'\n'..'👥|عدد المجموعات ← {'..Groups..'}'..'\n👤| عدد المشتركين ← {'..Users..'}'
