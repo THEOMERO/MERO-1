@@ -6895,24 +6895,28 @@ end,nil)
 end
 end
 
-if text == 'مسح كليشه المطور' and SudoBot(msg) then
-database:del(bot_id..'TEXT_SUDO')
-send(msg.chat_id_, msg.id_,'⌯︙تم مسح كليشه المطور')
+if text == 'حذف كليشه المطور' and SudoBot(msg) then
+database:del(bot_id..'Text:Dev:Bot')
+send(msg.chat_id_, msg.id_,'܁༯┆تم حذف كليشه المطور ')
 end
 if text == 'ضع كليشه المطور' and SudoBot(msg) then
-database:set(bot_id..'Set:TEXT_SUDO'..msg.chat_id_..':'..msg.sender_user_id_,true)
-send(msg.chat_id_,msg.id_,'⌯︙ارسل الكليشه الان')
+if AddChannel(msg.sender_user_id_) == false then
+send(msg.chat_id_, msg.id_,'🔖| لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌| اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
 return false
 end
-if text and database:get(bot_id..'Set:TEXT_SUDO'..msg.chat_id_..':'..msg.sender_user_id_) then
+database:set(bot_id..'Set:Text:Dev:Bot'..msg.chat_id_,true)
+send(msg.chat_id_, msg.id_,'܁༯┆ارسل الكليشةه الان ')
+return false
+end
+if text and database:get(bot_id..'Set:Text:Dev:Bot'..msg.chat_id_) then
 if text == 'الغاء' then 
-database:del(bot_id..'Set:TEXT_SUDO'..msg.chat_id_..':'..msg.sender_user_id_)
-send(msg.chat_id_,msg.id_,'⌯︙تم الغاء حفظ كليشة المطور')
+database:del(bot_id..'Set:Text:Dev:Bot'..msg.chat_id_)
+send(msg.chat_id_, msg.id_,'܁༯┆تم الغاء حفظ كليشةه المطور ')
 return false
 end
-database:set(bot_id..'TEXT_SUDO',text)
-database:del(bot_id..'Set:TEXT_SUDO'..msg.chat_id_..':'..msg.sender_user_id_)
-send(msg.chat_id_,msg.id_,'⌯︙تم حفظ كليشة المطور')
+database:set(bot_id..'Text:Dev:Bot',text)
+database:del(bot_id..'Set:Text:Dev:Bot'..msg.chat_id_)
+send(msg.chat_id_, msg.id_,'܁༯┆تم حفظ كليشةه المطور ')
 return false
 end
 if text == 'تعين الايدي' and Manager(msg) then
