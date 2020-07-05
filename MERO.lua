@@ -6790,9 +6790,9 @@ database:del(bot_id..'Get:Welcome:Group'..msg.chat_id_)
 send(msg.chat_id_, msg.id_,'💠| تم ازالة ترحيب المجموعه') 
 end
 end
-if text == 'منع' and tonumber(msg.reply_to_message_id_) > 0 and Manager(msg) then     
+f text == 'منع' and tonumber(msg.reply_to_message_id_) > 0 and Manager(msg) then     
 function cb(a,b,c) 
-textt = '📮| تم منع '
+textt = '⌯︙تم منع '
 if b.content_.sticker_ then
 local idsticker = b.content_.sticker_.set_id_
 database:sadd(bot_id.."filtersteckr"..msg.chat_id_,idsticker)
@@ -6819,7 +6819,7 @@ tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonu
 end
 if text == 'الغاء منع' and tonumber(msg.reply_to_message_id_) > 0 and Manager(msg) then     
 function cb(a,b,c) 
-textt = '📮| تم الغاء منع '
+textt = '⌯︙تم الغاء منع '
 if b.content_.sticker_ then
 local idsticker = b.content_.sticker_.set_id_
 database:srem(bot_id.."filtersteckr"..msg.chat_id_,idsticker)
@@ -6844,18 +6844,44 @@ end
 end
 tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_) }, cb, nil)
 end
+
+if text == "مسح قائمه المنع"and Manager(msg) then   
+local list = database:smembers(bot_id.."MERO1:List:Filter"..msg.chat_id_)  
+for k,v in pairs(list) do  
+database:del(bot_id.."MERO1:Add:Filter:Rp1"..msg.sender_user_id_..msg.chat_id_)  
+database:del(bot_id.."MERO1:Add:Filter:Rp2"..v..msg.chat_id_)  
+database:srem(bot_id.."MERO1:List:Filter"..msg.chat_id_,v)  
+end  
+send(msg.chat_id_, msg.id_,"⌯︙تم مسح قائمه المنع")  
+end
+
+if text == "قائمه المنع" and Manager(msg) then   
+local list = database:smembers(bot_id.."MERO1:List:Filter"..msg.chat_id_)  
+t = "\n⌯︙قائمة المنع \n… … … … … … … … … … …\n"
+for k,v in pairs(list) do  
+local MERO_Msg = database:get(bot_id.."MERO1:Add:Filter:Rp2"..v..msg.chat_id_)   
+t = t..""..k.."- "..v.." » {"..MERO_Msg.."}\n"    
+end  
+if #list == 0 then  
+t = "⌯︙لا يوجد كلمات ممنوعه"  
+end  
+send(msg.chat_id_, msg.id_,t)  
+end  
+
 if text == 'مسح قائمه منع المتحركات' and Manager(msg) then     
 database:del(bot_id.."filteranimation"..msg.chat_id_)
-send(msg.chat_id_, msg.id_,'🔖| تم مسح قائمه منع المتحركات')  
+send(msg.chat_id_, msg.id_,'⌯︙تم مسح قائمه منع المتحركات')  
 end
 if text == 'مسح قائمه منع الصور' and Manager(msg) then     
 database:del(bot_id.."filterphoto"..msg.chat_id_)
-send(msg.chat_id_, msg.id_,'🔖| تم مسح قائمه منع الصور')  
+send(msg.chat_id_, msg.id_,'⌯︙تم مسح قائمه منع الصور')  
 end
 if text == 'مسح قائمه منع الملصقات' and Manager(msg) then     
 database:del(bot_id.."filtersteckr"..msg.chat_id_)
-send(msg.chat_id_, msg.id_,'🔖| تم مسح قائمه منع الملصقات')  
+send(msg.chat_id_, msg.id_,'⌯︙تم مسح قائمه منع الملصقات')  
 end
+------------------
+
 if text == 'المطور' or text == 'مطور' or text == 'المطوره' then
 local Text_Dev = database:get(bot_id..'Text:Dev:Bot')
 if Text_Dev then 
