@@ -9364,75 +9364,16 @@ end
 end -- Chat_Type = 'GroupBot' 
 end -- end msg
 --------------------------------------------------------------------------------------------------------------
-if text == 'تفعيل' and not DevBot(msg) and not database:get(bot_id..'MERO:Free:Add:Bots') then 
-local url,res = http.request('http://MERO.ml/joinch/?id='..msg.sender_user_id_)
-data = JSON.decode(url)
-if data.Ch_Member.MERO ~= true then
-send(msg.chat_id_, msg.id_,'⌯︙لا تستطيع استخدام البوت \n ⌯︙يرجى الاشتراك بالقناه اولا \n ⌯︙اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-return false 
-end
-if msg.can_be_deleted_ == false then 
-send(msg.chat_id_, msg.id_,'⌯┇البوت ليس ادمن يرجى ترقيتي !') 
-return false  
-end
-tdcli_function ({ ID = "GetChannelFull", channel_id_ = msg.chat_id_:gsub("-100","")}, function(arg,data)  
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
-tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
-tdcli_function ({ID = "GetChatMember",chat_id_ = msg.chat_id_,user_id_ = msg.sender_user_id_},function(arg,da) 
-if da and da.status_.ID == "ChatMemberStatusEditor" or da and da.status_.ID == "ChatMemberStatusCreator" then
-if da and da.user_id_ == msg.sender_user_id_ then
-if da.status_.ID == "ChatMemberStatusCreator" then
-var = 'المنشئ'
-elseif da.status_.ID == "ChatMemberStatusEditor" then
-var = 'الادمن'
-else 
-var= 'عضو'
-end
-if database:sismember(bot_id..'MERO:Chek:Groups',msg.chat_id_) then
-send(msg.chat_id_, msg.id_,'⌯┇المجموعه مفعله سابقا ')
-else
-if tonumber(data.member_count_) < tonumber(database:get(bot_id..'MERO:Num:Add:Bot') or 0) and not DevMERO(msg) then
-send(msg.chat_id_, msg.id_,'⌯┇عدد اعضاء المجموعه اقل من *~ {'..(database:get(bot_id..'MERO:Num:Add:Bot') or 0)..'* عضو')
-return false
-end
-Reply_Status(msg,result.id_,'reply_Add','⌯┇تم تفعيل المجموعه ~ '..chat.title_..'')
-database:sadd(bot_id..'MERO:Chek:Groups',msg.chat_id_)  
-database:sadd(bot_id..'MERO:Basic:Constructor'..msg.chat_id_, msg.sender_user_id_)
-local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
-local NumMember = data.member_count_
-local NameChat = chat.title_
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub("`","") 
-NameChat = NameChat:gsub("*","") 
-NameChat = NameChat:gsub("{","") 
-NameChat = NameChat:gsub("}","") 
-local IdChat = msg.chat_id_
-local AddPy = var
-local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..token..'/exportChatInviteLink?chat_id='..msg.chat_id_))
-if linkgpp.ok == true then 
-LinkGp = linkgpp.result
-else
-LinkGp = 'لا يوجد'
-end
-Text = '⌯┇تم تفعيل مجموعه جديده\n'..
-'\n⌯┇بواسطة ~ '..Name..''..
-'\n⌯┇موقعه في المجموعه ~ '..AddPy..'' ..
-'\n⌯┇ايدي المجموعه ~ `'..IdChat..'`'..
-'\n⌯┇عدد اعضاء المجموعه *~ '..NumMember..'*'..
-'\n⌯┇اسم المجموعه ~ ['..NameChat..']'..
-'\n⌯┇الرابط ~ ['..LinkGp..']'
-if not DevMERO(msg) then
-sendText(Id_Sudo,Text,0,'md')
+function tdcli_update_callback(data)  -- clback
+if data.ID == ("UpdateChannel") then 
+if data.channel_.status_.ID == ("ChatMemberStatusKicked") then 
+redis:srem(bot_id..'Storm:ChekBotAdd','-100'..data.channel_.id_)  
+send(SUDO, 0,'📬| تم طردي من مجموعه \n💢| ايدي المجموعه : `'..'-100'..data.channel_.id_..'`')
 end
 end
-end
-end
-end,nil)   
-end,nil) 
-end,nil) 
-end,nil)
-end
+if data.ID == "UpdateNewMessage" then  -- new msg
+msg = data.message_
+text = msg.content_.text_
 
 --------------------------------------------------------------------------------------------------------------
 if msg.date_ and msg.date_ < tonumber(os.time() - 15) then
