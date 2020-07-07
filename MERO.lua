@@ -98,7 +98,7 @@ echo -e "\e[36m"
 done
 ]])  
 file:close()  
-file = io.open("BK", "w")  
+file = io.open("run", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/MERO
@@ -147,8 +147,8 @@ print([[
 |/ \___/ (_______)   \_/   |_/    \/|/     \|
 
 > CH › @MERO170
-> CH › @MERO_01
-~> DEVELOPER › @FEEEM
+> CH › @pvv_v
+~> DEVELOPER › @KKKKK4
 ]])
 sudos = dofile("./Info.lua") 
 SUDO = tonumber(sudos.SUDO)
@@ -2303,7 +2303,7 @@ local textchuser = database:get(bot_id..'text:ch:user')
 if textchuser then
 send(msg.chat_id_, msg.id_,'['..textchuser..']')
 else
-send(msg.chat_id_, msg.id_,'⁂︎︙لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n ⁂︎| اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
+send(msg.chat_id_, msg.id_,'⁂︎︙لا تستطيع استخدام البوت يرجى الاشتراك في القناة حتى تتمكن من استخدام الاوامر \n 📌| اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
 end
 return false
 end
@@ -9360,110 +9360,20 @@ send(msg.chat_id_, msg.id_,t)
 return false
 end
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+end -- Chat_Type = 'GroupBot' 
+end -- end msg
 --------------------------------------------------------------------------------------------------------------
-if text == 'تفعيل' and Sudo_bot(msg) then 
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = redis:get('MERO:'..bot_id..'text:ch:user')
-if textchuser then
-else
-send(msg.chat_id_, msg.id_,'⁂︎︙لا تستطيع استخدام البوت \n ⁂︎︙يرجى الاشتراك بالقناه اولا \n ⁂︎︙اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-if msg.can_be_deleted_ == false then 
-send(msg.chat_id_, msg.id_,'🚸┋البوت ليس ادمن يرجى ترقيتي !') 
-return false  
-end
-tdcli_function ({ ID = "GetChannelFull", channel_id_ = msg.chat_id_:gsub("-100","")}, function(arg,data)  
-if tonumber(data.member_count_) < tonumber(redis:get('MERO:'..bot_id..'Num:Add:Bot') or 0) and not Sudo_id(msg) then
-send(msg.chat_id_, msg.id_,'👥┋عدد اعضاء المجموعه اقل من *~ {'..(redis:get('MERO:'..bot_id..'Num:Add:Bot') or 0)..'* عضو')
-return false
-end
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
-tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
-if redis:sismember('MERO:'..bot_id..'Groups_Users',msg.chat_id_) then
-send(msg.chat_id_, msg.id_,'🔅┋المجموعه مفعله بالتأكيد ')
-else
-sendText(msg.chat_id_,'\n👤┋ بواسطة : ['..string.sub(result.first_name_,0, 70)..'](tg://user?id='..result.id_..')\n☑┋ تم تفعيل المجموعه {'..chat.title_..'}',msg.id_/2097152/0.5,'md')
-redis:sadd('MERO:'..bot_id..'Groups_Users',msg.chat_id_)
-local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
-local NameChat = chat.title_
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub("`","") 
-NameChat = NameChat:gsub("*","") 
-NameChat = NameChat:gsub("{","") 
-NameChat = NameChat:gsub("}","") 
-local IdChat = msg.chat_id_
-local NumMember = data.member_count_
-local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..token..'/exportChatInviteLink?chat_id='..msg.chat_id_))
-if linkgpp.ok == true then 
-LinkGp = linkgpp.result
-else
-LinkGp = 'لا يوجد'
-end
-Text = '🔖┋تمت اضافتي الى مجموعة جديدة\n'..
-'\n👤┋بواسطة » '..Name..''..
-'\n🎫┋ايدي المجموعه » `'..IdChat..'`'..
-'\n👥┋عدد اعضاء المجموعه *» '..NumMember..'*'..
-'\n📧┋اسم المجموعه » ['..NameChat..']'..
-'\n📎┋الرابط » ['..LinkGp..']'
-if not Sudo_id(msg) then
-sendText(SUDO,Text,0,'md')
+function tdcli_update_callback(data)  -- clback
+if data.ID == ("UpdateChannel") then 
+if data.channel_.status_.ID == ("ChatMemberStatusKicked") then 
+redis:srem(bot_id..'Storm:ChekBotAdd','-100'..data.channel_.id_)  
+send(SUDO, 0,'📬| تم طردي من مجموعه \n💢| ايدي المجموعه : `'..'-100'..data.channel_.id_..'`')
 end
 end
-end,nil) 
-end,nil) 
-end,nil)
-end
-if text == 'تعطيل' and Sudo_bot(msg) then 
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = redis:get('MERO:'..bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'⁂︎︙لا تستطيع استخدام البوت \n ⁂︎︙يرجى الاشتراك بالقناه اولا \n ⁂︎︙اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
-tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
-if not redis:sismember('MERO:'..bot_id..'Groups_Users',msg.chat_id_) then
-send(msg.chat_id_, msg.id_,'☑┋المجموعه معطله سابقا ')
-else
-sendText(msg.chat_id_,'\n👤┋ بواسطة : ['..string.sub(result.first_name_,0, 70)..'](tg://user?id='..result.id_..')\n🚫┋ تم تعطيل المجموعه {'..chat.title_..'}',msg.id_/2097152/0.5,'md')
-redis:srem('MERO:'..bot_id..'Groups_Users',msg.chat_id_)  
-local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
-local NameChat = chat.title_
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub("`","") 
-NameChat = NameChat:gsub("*","") 
-NameChat = NameChat:gsub("{","") 
-NameChat = NameChat:gsub("}","") 
-local IdChat = msg.chat_id_
-local AddPy = var
-local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..token..'/exportChatInviteLink?chat_id='..msg.chat_id_))
-if linkgpp.ok == true then 
-LinkGp = linkgpp.result
-else
-LinkGp = 'لا يوجد'
-end
-redis:set('MERO:'..bot_id.."Private:Group:Link"..msg.chat_id_,LinkGp) 
-
-Text = '🚫┋تم طردي من المجموعة\n'..
-'\n👤┋بواسطة » '..Name..''..
-'\n🎫┋ايدي المجموعه » `'..IdChat..'`'..
-'\n📥┋اسم المجموعه » ['..NameChat..']'..
-'\n📎┋الرابط » ['..LinkGp..']'
-if not Sudo_id(msg) then
-sendText(SUDO,Text,0,'md')
-end
-end
-end,nil) 
-end,nil) 
-end
-
+if data.ID == "UpdateNewMessage" then  -- new msg
+msg = data.message_
+text = msg.content_.text_
 --------------------------------------------------------------------------------------------------------------
 if msg.date_ and msg.date_ < tonumber(os.time() - 15) then
 print('OLD MESSAGE')
