@@ -9365,7 +9365,6 @@ if text == 'تفعيل' and Sudo_bot(msg) then
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = redis:get('MERO:'..bot_id..'text:ch:user')
 if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
 else
 send(msg.chat_id_, msg.id_,'⁂︎︙لا تستطيع استخدام البوت \n ⁂︎︙يرجى الاشتراك بالقناه اولا \n ⁂︎︙اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
 end
@@ -9464,78 +9463,7 @@ end
 end,nil) 
 end,nil) 
 end
-if text == 'تفعيل' and not Sudo_bot(msg) and not redis:get('MERO:'..bot_id..'Free:Add:Bots') then 
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = redis:get('MERO:'..bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'🔅┋عذراً عليك الاشتراك في القناة\n📌┋اشترك هنا ['..redis:get('MERO:'..bot_id..'add:ch:username')..']')
-end
-return false
-end
-if msg.can_be_deleted_ == false then 
-send(msg.chat_id_, msg.id_,'🚸┋البوت ليس ادمن يرجى ترقيتي !') 
-return false  
-end
-tdcli_function ({ ID = "GetChannelFull", channel_id_ = msg.chat_id_:gsub("-100","")}, function(arg,data)  
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
-tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)  
-tdcli_function ({ID = "GetChatMember",chat_id_ = msg.chat_id_,user_id_ = msg.sender_user_id_},function(arg,da) 
-if da and da.status_.ID == "ChatMemberStatusEditor" or da and da.status_.ID == "ChatMemberStatusCreator" then
-if da and da.user_id_ == msg.sender_user_id_ then
-if da.status_.ID == "ChatMemberStatusCreator" then
-var = 'المنشئ'
-elseif da.status_.ID == "ChatMemberStatusEditor" then
-var = 'الادمن'
-else 
-var= 'عضو'
-end
-if redis:sismember('MERO:'..bot_id..'Groups_Users',msg.chat_id_) then
-send(msg.chat_id_, msg.id_,'📮┋المجموعه مفعله سابقا ')
-else
-if tonumber(data.member_count_) < tonumber(redis:get('MERO:'..bot_id..'Num:Add:Bot') or 0) and not Sudo_id(msg) then
-send(msg.chat_id_, msg.id_,'👥┋عدد اعضاء المجموعه اقل من *~ {'..(redis:get('MERO:'..bot_id..'Num:Add:Bot') or 0)..'* عضو')
-return false
-end
-sendText(msg.chat_id_,'\n👤┋ بواسطة : ['..string.sub(result.first_name_,0, 70)..'](tg://user?id='..result.id_..')\n☑┋ تم تفعيل المجموعه {'..chat.title_..'}',msg.id_/2097152/0.5,'md')
-redis:sadd('MERO:'..bot_id..'Groups_Users',msg.chat_id_)  
-redis:sadd('MERO:'..bot_id..'Set:Basic:Constructor'..msg.chat_id_, msg.sender_user_id_)
-local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
-local NumMember = data.member_count_
-local NameChat = chat.title_
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub('"',"") 
-NameChat = NameChat:gsub("`","") 
-NameChat = NameChat:gsub("*","") 
-NameChat = NameChat:gsub("{","") 
-NameChat = NameChat:gsub("}","") 
-local IdChat = msg.chat_id_
-local AddPy = var
-local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..token..'/exportChatInviteLink?chat_id='..msg.chat_id_))
-if linkgpp.ok == true then 
-LinkGp = linkgpp.result
-else
-LinkGp = 'لا يوجد'
-end
-Text = '🔖┋تمت اضافتي الى مجموعة جديدة\n'..
-'\n👤┋بواسطة » '..Name..''..
-'\n📌┋موقعه في المجموعه » '..AddPy..'' ..
-'\n🎫┋ايدي المجموعه » `'..IdChat..'`'..
-'\n👥┋عدد اعضاء المجموعه *» '..NumMember..'*'..
-'\n📧┋اسم المجموعه » ['..NameChat..']'..
-'\n📎┋الرابط » ['..LinkGp..']'
-if not Sudo_id(msg) then
-sendText(SUDO,Text,0,'md')
-end
-end
-end
-end
-end,nil)   
-end,nil) 
-end,nil) 
-end,nil)
-end
+
 --------------------------------------------------------------------------------------------------------------
 if msg.date_ and msg.date_ < tonumber(os.time() - 15) then
 print('OLD MESSAGE')
